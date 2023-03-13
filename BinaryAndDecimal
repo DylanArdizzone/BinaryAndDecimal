@@ -1,0 +1,51 @@
+import java.math.BigInteger;
+import java.util.*;
+
+public class BinaryAndDecimal {
+	
+	public BinaryAndDecimal() {
+		System.out.println("Do you want to 1) convert binary to decimal or 2) convert decimal to binary? (1/2) ");
+		Scanner scan = new Scanner (System.in);
+		int i = scan.nextInt();
+		System.out.println("Enter a number: ");
+		Scanner scan2 = new Scanner(System.in);
+		BigInteger num = scan2.nextBigInteger();
+		if (i ==1) {
+			System.out.println(Binary2Decimal(num));
+		}
+		else {
+			System.out.println(Decimal2Binary(num));
+		}
+		scan.close();
+		scan2.close();
+	}
+	
+	public String Decimal2Binary(BigInteger number) {
+		String sleez = "";
+		BigInteger divized = number;
+		BigInteger a = new BigInteger("2");
+		BigInteger zero = new BigInteger("0");
+		while(!divized.equals(zero)) {
+			sleez = divized.remainder(a) + sleez;
+			divized = divized.divide(a);
+		}
+		return sleez;
+	}
+	
+	public BigInteger Binary2Decimal(BigInteger bin) {
+		BigInteger hb = bin;
+		BigInteger ten = new BigInteger("10");
+		long pwr = 0;
+		BigInteger adding= new BigInteger ("0");
+		BigInteger zero = new BigInteger("0");
+		while (!hb.equals(zero)) {
+			BigInteger remain = hb.remainder(ten);
+			String l = ""+(long) Math.pow(2, pwr);
+			BigInteger k = new BigInteger(l);
+			adding = adding.add(remain.multiply(k));
+			pwr+=1;
+			hb = hb.divide(ten);
+		}
+		return adding;
+	}
+}
